@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Pager.css">
+</head>
+<body>
+    <script src="./pager.js"></script>
+    <script>
+        const pager = new Pager({
+            current: 2,
+            onPageChange: (newPage)=>{
+                console.log(newPage)
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+.pager{
+    height: 20px;
+    line-height: 20px;
+}
+.pager span{
+    border: 1px solid black;
+    margin: 5px;
+    padding: 0 5px;
+    cursor: pointer;
+}
+.pager span:hover{
+    border: 1px solid #00f;
+    color: #00f;
+}
+.pager span.current,
+.pager span.current:hover{
+    border: 0px;
+    color: orange;
+}

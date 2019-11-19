@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./table.css">
+</head>
+<body>
+    <script src="./table.js"></script>
+    <script>
+        var table = new Table({
+            columns: [
+                {
+                    title: "姓名",
+                    propName: "name"
+                },
+                {
+                    title: "班级",
+                    propName: "class"
+                },
+                {
+                    title: "操作",
+                    propName: "operation",
+                    render: (propValue, data)=>{
+                        return `<button>${data[propValue]}</button>`
+                    }
+                }
+            ]
+        });
+        table.dataSource = [
+            {
+                name: 'wq',
+                class: '1704',
+                operation: "修改"
+            },
+            {
+                name: 'wq',
+                class: '1704',
+                operation: "删除"
+            }
+        ]
+    </script>
+</body>
+</html>
