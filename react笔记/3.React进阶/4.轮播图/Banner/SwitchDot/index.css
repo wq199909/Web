@@ -1,0 +1,24 @@
+.Dot{
+    position: absolute;
+    padding: 2px 4px;
+    background-color: rgba(255, 255, 255, .5);
+    border-radius: 8px;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    display: flex;
+}
+.Dot span{
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 3px;
+}
+.Dot span:hover{
+    background-color: rgba(0,0,0,.5);
+    cursor: pointer;
+}
+.Dot span.active{
+    background-color: #f40;
+}
