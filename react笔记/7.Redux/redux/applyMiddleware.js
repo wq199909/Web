@@ -5,7 +5,7 @@
  * @email: 2749374330@qq.com
  * @Date: 2019-12-03 13:06:12
  * @LastEditors: WangQing
- * @LastEditTime: 2019-12-03 13:13:37
+ * @LastEditTime: 2019-12-04 12:30:13
  */
 import compose from './utils/compose';
 
@@ -16,7 +16,7 @@ export default function(...middlewares){
             let dispatch = () => {throw new Error("目前还不能使用")};
             const simpleStore = {
                 getState: store.getState,
-                dispatch: store.dispatch
+                dispatch: (...args)=>dispatch(...args)
             }
 
             const dispatchProducers = middlewares.map(mid=>mid(simpleStore));
