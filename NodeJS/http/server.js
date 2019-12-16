@@ -5,19 +5,26 @@
  * @email: 2749374330@qq.com
  * @Date: 2019-12-14 16:52:09
  * @LastEditors: WangQing
- * @LastEditTime: 2019-12-15 21:28:33
+ * @LastEditTime: 2019-12-16 15:51:12
  */
 let http = require('http');
 let url = require('url')
 let fs = require('fs');
 let conf = require('./conf');
 let loader = require('./loader');
-let log = require('./log.js')
+let log = require('./log.js');
+let filterSet = require('./filterLoader');
 
 http.createServer(function(request, response){
     let pathName = url.parse(request.url).pathname.replace(/\//g, '\\');
     let params = url.parse(request.url, true).query;
     log(pathName);
+    for (let i = 0 ; i < filterSet.length ; i ++) {
+        let flag = filterSet[i](request, response);
+        if (!flag) {
+            return;
+        }
+    }
     var isStatic = isStaticsRequest(pathName);
     if(isStatic){
         try{
