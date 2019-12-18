@@ -1,0 +1,48 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: WangQing
+ * @email: 2749374330@qq.com
+ * @Date: 2019-12-18 14:35:52
+ * @LastEditors: WangQing
+ * @LastEditTime: 2019-12-18 15:50:34
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function submitFile () {
+            var file = document.getElementById("file").files[0];
+
+            var form = new FormData();
+            form.append("file", file);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("post", "/upload", true);
+            xhr.onload = function () {
+                alert("上传完成!");
+            };
+            xhr.send(form);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var path = xhr.responseText;
+                    console.log(path);
+                    // document.getElementById("pic").src = "/getPic?path=" + path;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    这是Main页面
+    <input type="file" id="file" />
+    <input type="button" onclick="submitFile()" value="asd">
+
+    <a href="/getPic?path=file\9ca051f15ba90f28e27215fdc9505369" download="2.ico">点击此处</a>
+
+    <!-- <img id="pic" src="#"> -->
+
+</body>
+</html>
