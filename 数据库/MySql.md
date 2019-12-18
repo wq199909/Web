@@ -4,8 +4,8 @@
  * @Author: WangQing
  * @email: 2749374330@qq.com
  * @Date: 2019-12-15 21:54:33
- * @LastEditors: WangQing
- * @LastEditTime: 2019-12-15 22:39:35
+ * @LastEditors  : WangQing
+ * @LastEditTime : 2019-12-18 16:53:04
  -->
 # MySql
 
@@ -33,3 +33,5 @@
     - 数据表改
 - delete from <表名> where (key = value);
     - 数据表删
+
+> https://www.runoob.com/nodejs/nodejs-mysql.html
