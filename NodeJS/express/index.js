@@ -4,18 +4,19 @@
  * @Author: WangQing
  * @email: 2749374330@qq.com
  * @Date: 2019-12-17 15:43:42
- * @LastEditors: WangQing
- * @LastEditTime: 2019-12-18 15:28:29
+ * @LastEditors  : WangQing
+ * @LastEditTime : 2019-12-18 19:19:08
  */
 let express = require("express");
 let conf = require("./conf");
 let multer = require("multer");
 let loader = require("./loader");
-
+let cookie = require("cookie-parser");
 let app = express();
 
 let uploadSingle = multer({dest: "./file/"});
 app.use(express.static(conf.page_path));
+app.use(cookie());
 app.get("/api/*", function(request, response, next){
     console.log(request.cookie)
     if(request.cookies&&request.cookies.id){
