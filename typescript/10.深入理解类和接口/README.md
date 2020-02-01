@@ -9,6 +9,8 @@
  -->
 # 深入理解类和接口
 
+[toc]
+
 ## 面向对象概念
 
 ### 为什么ts中面向对象
@@ -169,3 +171,62 @@ protected: 受保护的成员，只能在自身和子类中访问
 
 系统中缺少对对能力的定义 -- 接口
 
+面向对象领域中的接口的语义：表达了某个类是否拥有某种能力
+
+某个类具有某种能力，其实，就是实现了某种接口
+
+类型保护函数：通过调用该函数，会触发ts的类型保护
+
+```ts
+function hasFireShow(ani: object): ani is IFireShow{
+    if((ani as unknown as IFireShow).singleFire && (ani as unknown as IFireShow).doubleFire){
+        return true;
+    }
+    return false;
+}
+
+```
+
+
+## 索引器
+
+```对象[值]```，使用成员表达式
+
+在ts中，默认情况下，不对索引器（成员表达式）做严格的类型检查
+
+使用配置```noImplicitAny```开启对隐式any的检查
+
+隐式any：ts根据实际情况推导出的any类型
+
+在类中，索引器书写的位置应该是所有成员之前
+
+ts中索引器的作用
+
+- 在严格的类型检查中，可以实现为类动态的添加成员
+- 可以实现动态的操作类成员
+
+在js中，所有的成员本质上，都是字符串，如果使用数字作为成员名，会自动转换为字符串
+
+在ts中，如果某个类中使用了两种类型的索引器，要求两种索引器的值必须匹配
+
+## this指向问题
+
+https://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/
+
+### 在js中this指向的几种情况
+
+明确：大部分情况，this指向取决于函数的调用方式
+
+- 如果直接调用函数（全局调用），this指向全局对象或undefined（启用严格模式）
+- 如果使用```对象.方法```调用，this指向对象本身
+- 如果是dom事件处理函数，this指向事件处理函数
+
+特殊情况：
+- 箭头函数，this在函数声明明确指向，指向函数位置的this
+- 使用bind、apply、call手动绑定this指向的对象
+
+### ts中的this
+
+配置noImplicitThis为true，表示不允许this隐式指向any
+
+在ts中，允许在书写函数时，手动声明该函数中的this指向，将this作为函数的第一个参数，该参数只用于约束this，并不是真正的参数，也不会出现在编译结果中
