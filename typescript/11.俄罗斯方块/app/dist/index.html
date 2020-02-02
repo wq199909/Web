@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>俄罗斯方块</title>
+    <style>
+        html, body{
+            background-color: #ccc;
+        }
+        #root{
+            width: 500px;
+            height: 500px;
+            margin: 20px auto;
+            position: relative;
+            display: flex;
+        }
+        #panel{
+            width: 300px;
+            height: 300px;
+            background-color: #000;
+            position: relative;
+        }
+        #next{
+            margin: 30px auto;
+            position: relative;
+            width: 120px;
+            height: 60px !important;
+        }
+        #score{
+            width: 100px;
+            margin: 0 auto;
+            font-size: 25px;
+            color: red;
+        }
+        p{
+            height: 20px;
+            line-height: 20px;
+            padding-left: 20px;
+        }
+        #state{
+            color: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div id="panel">
+            <div id="state"></div>
+        </div>
+        <div id="tip">
+            <div id="next"></div>
+            <div id="score"></div>
+            <p>使用键盘操作游戏</p>
+            <p>回车键开始游戏</p>
+            <p>空格暂停游戏</p>
+            <p>⬆️控制旋转</p>
+            <p>⬇️控制到达底部</p>
+            <p>⬅️控制左移</p>
+            <p>➡️控制右移</p>
+        </div>
+    </div>
+<script type="text/javascript" src="script/bundle.js"></script></body>
+</html>
