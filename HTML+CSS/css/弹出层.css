@@ -1,0 +1,38 @@
+
+.main img{
+    width: 100%;
+}
+.modal{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(155, 147, 147, 0.5);
+    left: 0;
+    top: 0;
+}
+.container{
+    height: 512px;
+    width: 404px;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 10px;
+    border-radius: 4px;
+}
+.modal .container .close{
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    line-height: 30px;
+    text-align: center;
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    cursor: pointer;
+}

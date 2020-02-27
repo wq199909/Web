@@ -1,0 +1,43 @@
+/* 常规流练习 */
+
+body{
+    background-color: #4d4a40;
+    line-height: 2;
+    min-width: 1000px;
+}
+.container{
+    background-color: #fff;
+    margin: 20px auto;
+    width: 90%;
+    padding-top: 30px;
+}
+.container header{
+    background-color: #267890;
+    margin: 0px -34px 30px;
+    color: #fff;
+    text-align: center;
+    border: 5px solid #14414e;
+}
+.container header h1{
+    font-size: 42px;
+}
+.container header .original-link{
+    color: #dbdbdb;
+    margin-bottom: 22px;
+}
+.container header .original-link:hover{
+    color: #fff;
+}
+.container section{
+    width: 90%;
+    margin: 0 auto;
+}
+.container section p{
+    margin: 1em 0;
+}
+.container section h2{
+    font-size: 32px;
+    font-weight: bold;
+    border-top: 1px dashed;
+    border-bottom: 1px dashed;
+}
