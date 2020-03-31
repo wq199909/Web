@@ -1,0 +1,12 @@
+.beauty_button{
+    border:1px solid #333;
+    background: rgb(108, 197, 226);
+}
+.beauty_button:hover{
+    background: lightblue;
+}
+.bg{
+    background: url("../../assets/dog.jpeg");
+    width: 300px;
+    height: 300px;
+}
