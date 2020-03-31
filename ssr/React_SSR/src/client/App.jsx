@@ -1,9 +1,12 @@
 import React from 'react'
-import Home from '@/pages/Home';
 import "../assets/global"
+import RouteApp from "@/routes/RouteApp"
+import { BrowserRouter } from 'react-router-dom'
 
 export default function App() {
     return (
-        <Home/>
+        <BrowserRouter>
+            <RouteApp/>
+        </BrowserRouter>
     )
 }
