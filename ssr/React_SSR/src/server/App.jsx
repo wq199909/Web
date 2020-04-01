@@ -1,11 +1,13 @@
 import React from 'react'
 import RouteApp from "@/routes/RouteApp"
 import { StaticRouter } from 'react-router-dom'
-
-export default function App({location, context}) {
+import {Provider} from "react-redux"
+export default function App({location, context, store}) {
     return (
-        <StaticRouter location={location} context={context}>
-            <RouteApp/>
-        </StaticRouter>
+        <Provider store={store}>
+            <StaticRouter location={location} context={context}>
+                <RouteApp/>
+            </StaticRouter>
+        </Provider>
     )
 }

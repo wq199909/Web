@@ -639,23 +639,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.css */ "./src/pages/Home/index.css");
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _assets_dog_jpeg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/dog.jpeg */ "./src/assets/dog.jpeg");
+/* harmony import */ var _store_action_couter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/action/couter */ "./src/store/action/couter.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  const [number, setNumber] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Number: ", number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+
+
+
+const Counter = function ({
+  number,
+  onIncrease,
+  onDecrease
+}) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Number: ", number), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: _index_css__WEBPACK_IMPORTED_MODULE_1___default.a.beauty_button,
+    onClick: onIncrease
+  }, "\u52A0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: _index_css__WEBPACK_IMPORTED_MODULE_1___default.a.beauty_button,
+    onClick: onDecrease
+  }, "\u51CF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: _index_css__WEBPACK_IMPORTED_MODULE_1___default.a.bg
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: _assets_dog_jpeg__WEBPACK_IMPORTED_MODULE_2__["default"],
     alt: ""
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: _index_css__WEBPACK_IMPORTED_MODULE_1___default.a.bg
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: _index_css__WEBPACK_IMPORTED_MODULE_1___default.a.beauty_button,
-    onClick: () => {
-      setNumber(number + 1);
+  }));
+};
+
+function mapStateToProps(state) {
+  return {
+    number: state.counter
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onIncrease() {
+      dispatch(Object(_store_action_couter__WEBPACK_IMPORTED_MODULE_3__["increase"])());
+    },
+
+    onDecrease() {
+      dispatch(Object(_store_action_couter__WEBPACK_IMPORTED_MODULE_3__["decrease"])());
     }
-  }, "\u70B9\u51FB"));
-});
+
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, mapDispatchToProps)(Counter));
 
 /***/ }),
 
@@ -668,13 +699,51 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return index; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store_action_movies__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/action/movies */ "./src/store/action/movies.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
 
-function index() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Movies"));
+
+
+
+function Page({
+  movies = [],
+  loadMovies
+}) {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (window.requestPath === "/movies") {
+      console.log(movies);
+    } else {
+      loadMovies && loadMovies();
+    }
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Movies"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, movies.map(m => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    key: m._id
+  }, m.name))));
 }
+
+Page.loadData = async function (store) {
+  await store.dispatch(Object(_store_action_movies__WEBPACK_IMPORTED_MODULE_1__["fetchMovies"])());
+};
+
+function mapStateToProps(state) {
+  return {
+    movies: state.movies
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadMovies() {
+      dispatch(Object(_store_action_movies__WEBPACK_IMPORTED_MODULE_1__["fetchMovies"])());
+    }
+
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Page));
 
 /***/ }),
 
@@ -691,7 +760,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-function index() {
+function index(props) {
+  props.staticContext && (props.staticContext.resCode = 404);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Not Found"));
 }
 
@@ -810,17 +880,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes_RouteApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/routes/RouteApp */ "./src/routes/RouteApp.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
 function App({
   location,
-  context
+  context,
+  store
 }) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["StaticRouter"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
+    store: store
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["StaticRouter"], {
     location: location,
     context: context
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_routes_RouteApp__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_routes_RouteApp__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
 }
 
 /***/ }),
@@ -838,7 +914,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _getLinks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getLinks */ "./src/server/getLinks.js");
 
 
-/* harmony default export */ __webpack_exports__["default"] = (componentHTML => {
+/* harmony default export */ __webpack_exports__["default"] = ((componentHTML, path, store) => {
   return `
     <!DOCTYPE html>
     <html lang="en">
@@ -852,6 +928,10 @@ __webpack_require__.r(__webpack_exports__);
     </head>
     <body>
         <div id="root">${componentHTML}</div>
+        <script>
+            window.pageDatas = ${JSON.stringify(store.getState())};
+            window.requestPath = "${path}";
+        </script>
         ${Object(_getScripts__WEBPACK_IMPORTED_MODULE_0__["default"])()}
     </body>
     </html>
@@ -874,7 +954,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (() => {
   const result = fs__WEBPACK_IMPORTED_MODULE_0___default.a.readdirSync('./public/css').filter(file => file.endsWith('css')).map(file => `<link rel="stylesheet" href="/css/${file}"></link>`);
-  console.log(result);
   return result.join("\n");
 });
 
@@ -894,7 +973,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (() => {
   const result = fs__WEBPACK_IMPORTED_MODULE_0___default.a.readdirSync('./public/js').filter(file => file.endsWith('js')).map(file => `<script src="/js/${file}"></script>`);
-  console.log(result);
   return result.join("\n");
 });
 
@@ -910,16 +988,55 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./render */ "./src/server/render.js");
+/* harmony import */ var _services_MovieService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/MovieService */ "./src/services/MovieService.js");
+/* harmony import */ var http_proxy_middleware__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! http-proxy-middleware */ "http-proxy-middleware");
+/* harmony import */ var http_proxy_middleware__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(http_proxy_middleware__WEBPACK_IMPORTED_MODULE_2__);
+
+
 
 
 const express = __webpack_require__(/*! express */ "express");
 
 const app = express();
 app.use(express.static("./public"));
+app.use("/api", Object(http_proxy_middleware__WEBPACK_IMPORTED_MODULE_2__["createProxyMiddleware"])({
+  target: "http://yuanjin.tech:5005/",
+  changeOrigin: true
+}));
 app.get("*", _render__WEBPACK_IMPORTED_MODULE_0__["default"]);
 app.listen(8080, () => {
   console.log("server start on 8080");
 });
+
+/***/ }),
+
+/***/ "./src/server/loadData.js":
+/*!********************************!*\
+  !*** ./src/server/loadData.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return loadData; });
+/* harmony import */ var react_router_config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-router-config */ "react-router-config");
+/* harmony import */ var react_router_config__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_router_config__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _routes_RouteConfig__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/routes/RouteConfig */ "./src/routes/RouteConfig.js");
+
+
+async function loadData(path, store) {
+  const matchs = Object(react_router_config__WEBPACK_IMPORTED_MODULE_0__["matchRoutes"])(_routes_RouteConfig__WEBPACK_IMPORTED_MODULE_1__["default"], path);
+  let proms = [];
+
+  for (const match of matchs) {
+    if (match.route.component.loadData) {
+      proms.push(Promise.resolve(match.route.component.loadData(store)));
+    }
+  }
+
+  return Promise.all(proms);
+}
 
 /***/ }),
 
@@ -938,19 +1055,267 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/server */ "react-dom/server");
 /* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom_server__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _getHTML__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getHTML */ "./src/server/getHTML.js");
+/* harmony import */ var _loadData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./loadData */ "./src/server/loadData.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ((req, res) => {
+
+
+/* harmony default export */ __webpack_exports__["default"] = (async (req, res) => {
   const context = {};
+  const store = Object(_store__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  await Object(_loadData__WEBPACK_IMPORTED_MODULE_4__["default"])(req.path, store);
   const componentHTML = react_dom_server__WEBPACK_IMPORTED_MODULE_2___default.a.renderToString( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_0__["default"], {
     location: req.path,
-    context: context
+    context: context,
+    store: store
   }));
-  const html = Object(_getHTML__WEBPACK_IMPORTED_MODULE_3__["default"])(componentHTML);
+  const html = Object(_getHTML__WEBPACK_IMPORTED_MODULE_3__["default"])(componentHTML, req.path, store);
+
+  if (context.resCode) {
+    res.status(context.resCode);
+  }
+
   res.send(html);
 });
+
+/***/ }),
+
+/***/ "./src/services/MovieService.js":
+/*!**************************************!*\
+  !*** ./src/services/MovieService.js ***!
+  \**************************************/
+/*! exports provided: getMovies */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMovies", function() { return getMovies; });
+/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./request */ "./src/services/request.js");
+
+async function getMovies(page = 1, limit = 10) {
+  let req = await _request__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/movie", {
+    params: {
+      page,
+      limit
+    }
+  });
+  return req.data;
+}
+
+/***/ }),
+
+/***/ "./src/services/request.js":
+/*!*********************************!*\
+  !*** ./src/services/request.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+const config = {};
+
+if (typeof window === "undefined") {
+  // 服务器
+  config.baseURL = "http://yuanjin.tech:5005/";
+} else {// 浏览器
+}
+
+const instance = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create(config);
+/* harmony default export */ __webpack_exports__["default"] = (instance);
+
+/***/ }),
+
+/***/ "./src/store/action/couter.js":
+/*!************************************!*\
+  !*** ./src/store/action/couter.js ***!
+  \************************************/
+/*! exports provided: actionTypes, increase, decrease */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "actionTypes", function() { return actionTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "increase", function() { return increase; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decrease", function() { return decrease; });
+const actionTypes = {
+  increase: "couter/increase",
+  decrease: "couter/decrease"
+};
+function increase() {
+  return {
+    type: actionTypes.increase
+  };
+}
+function decrease() {
+  return {
+    type: actionTypes.decrease
+  };
+}
+
+/***/ }),
+
+/***/ "./src/store/action/movies.js":
+/*!************************************!*\
+  !*** ./src/store/action/movies.js ***!
+  \************************************/
+/*! exports provided: actionTypes, setDatas, fetchMovies */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "actionTypes", function() { return actionTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDatas", function() { return setDatas; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMovies", function() { return fetchMovies; });
+/* harmony import */ var _services_MovieService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/MovieService */ "./src/services/MovieService.js");
+
+const actionTypes = {
+  setDatas: "movies/setDatas",
+  fetchMovies: "movies/fetchMovies"
+};
+function setDatas(datas) {
+  return {
+    type: actionTypes.setDatas,
+    payload: datas
+  };
+}
+function fetchMovies(page = 1, limit = 10) {
+  return async function (dispatch) {
+    const resp = await Object(_services_MovieService__WEBPACK_IMPORTED_MODULE_0__["getMovies"])(page, limit);
+    dispatch(setDatas(resp.data));
+  };
+}
+
+/***/ }),
+
+/***/ "./src/store/index.js":
+/*!****************************!*\
+  !*** ./src/store/index.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducer */ "./src/store/reducer/index.js");
+/* harmony import */ var _action_movies__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./action/movies */ "./src/store/action/movies.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-thunk */ "redux-thunk");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+function makeStore() {
+  let store;
+
+  if (global.document) {
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || redux__WEBPACK_IMPORTED_MODULE_0__["compose"];
+    store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], window.pageDatas, composeEnhancers(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_3___default.a)));
+  } else {
+    store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_3___default.a));
+  }
+
+  return store;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (makeStore);
+
+/***/ }),
+
+/***/ "./src/store/reducer/counter.js":
+/*!**************************************!*\
+  !*** ./src/store/reducer/counter.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _action_couter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../action/couter */ "./src/store/action/couter.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function (state = 10, {
+  type
+}) {
+  switch (type) {
+    case _action_couter__WEBPACK_IMPORTED_MODULE_0__["actionTypes"].increase:
+      return state + 1;
+
+    case _action_couter__WEBPACK_IMPORTED_MODULE_0__["actionTypes"].decrease:
+      return state - 1;
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/store/reducer/index.js":
+/*!************************************!*\
+  !*** ./src/store/reducer/index.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./counter */ "./src/store/reducer/counter.js");
+/* harmony import */ var _movies__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./movies */ "./src/store/reducer/movies.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_2__["combineReducers"])({
+  counter: _counter__WEBPACK_IMPORTED_MODULE_0__["default"],
+  movies: _movies__WEBPACK_IMPORTED_MODULE_1__["default"]
+}));
+
+/***/ }),
+
+/***/ "./src/store/reducer/movies.js":
+/*!*************************************!*\
+  !*** ./src/store/reducer/movies.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _action_movies__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../action/movies */ "./src/store/action/movies.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function (state = [], {
+  type,
+  payload
+}) {
+  switch (type) {
+    case _action_movies__WEBPACK_IMPORTED_MODULE_0__["actionTypes"].setDatas:
+      return payload;
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 
@@ -976,6 +1341,17 @@ module.exports = require("fs");
 
 /***/ }),
 
+/***/ "http-proxy-middleware":
+/*!****************************************!*\
+  !*** external "http-proxy-middleware" ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("http-proxy-middleware");
+
+/***/ }),
+
 /***/ "react":
 /*!************************!*\
   !*** external "react" ***!
@@ -998,6 +1374,17 @@ module.exports = require("react-dom/server");
 
 /***/ }),
 
+/***/ "react-redux":
+/*!******************************!*\
+  !*** external "react-redux" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+
 /***/ "react-router-config":
 /*!**************************************!*\
   !*** external "react-router-config" ***!
@@ -1017,6 +1404,28 @@ module.exports = require("react-router-config");
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-dom");
+
+/***/ }),
+
+/***/ "redux":
+/*!************************!*\
+  !*** external "redux" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
+
+/***/ }),
+
+/***/ "redux-thunk":
+/*!******************************!*\
+  !*** external "redux-thunk" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-thunk");
 
 /***/ })
 

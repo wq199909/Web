@@ -1,18 +1,40 @@
 import React, {useState} from 'react'
 import styles from "./index.css";
 import picUrl from "../../assets/dog.jpeg"
-export default function () {
-    const [number, setNumber] = useState(0);
+import { increase, decrease } from '../../store/action/couter';
+import { connect } from 'react-redux';
+const Counter  = function ({number, onIncrease, onDecrease}) {
     return (
         <div>
         <h1>
            Number: {number}
         </h1>
-        <img src={picUrl} alt=""/>
-        <div className={styles.bg}></div>
         <button 
             className={styles.beauty_button}
-            onClick={()=>{setNumber(number+1)}}>点击</button>
+            onClick={onIncrease}>加</button>
+        <button 
+            className={styles.beauty_button}
+            onClick={onDecrease}>减</button>
+        <div className={styles.bg}></div>
+        <img src={picUrl} alt=""/>
         </div>
     )
 }
+function mapStateToProps(state){
+    return {
+        number: state.counter
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        onIncrease(){
+            dispatch(increase())
+        },
+        onDecrease(){
+            dispatch(decrease());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);

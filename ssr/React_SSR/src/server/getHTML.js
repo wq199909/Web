@@ -1,7 +1,7 @@
 
 import getScirpts from "./getScripts";
 import getLinks from "./getLinks";
-export default (componentHTML) => {
+export default (componentHTML, path, store) => {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -15,6 +15,10 @@ export default (componentHTML) => {
     </head>
     <body>
         <div id="root">${componentHTML}</div>
+        <script>
+            window.pageDatas = ${JSON.stringify(store.getState())};
+            window.requestPath = "${path}";
+        </script>
         ${getScirpts()}
     </body>
     </html>
